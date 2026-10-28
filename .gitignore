@@ -3,3 +3,7 @@
 .env
 .env.*
 .claude/settings.local.json
+public/mediapipe/
+public/models/
+node_modules/
+dist/
