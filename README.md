@@ -52,3 +52,7 @@ Game rules live in `src/core/` as pure TypeScript and are tested without a camer
 - Pose tracking: [MediaPipe Pose Landmarker](https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker) (Apache 2.0)
 - Display font: [Bungee](https://fonts.google.com/specimen/Bungee) by David Jonathan Ross (SIL Open Font License)
 - Judging: [Claude](https://www.anthropic.com/api) by Anthropic
+
+## Licence
+
+[MIT](LICENSE)
