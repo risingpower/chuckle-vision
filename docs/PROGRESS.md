@@ -10,7 +10,8 @@ MVP built for the 2026-10-29 user-testing demo. Spec and architecture: `docs/SPE
 - [x] Pose matching, round state machine, scoring (unit tested)
 - [x] Claude Silent Critic endpoint (verified live against the API)
 - [x] Mascot, scene, confetti, synthesised sound, replay recorder
-- [ ] Play through in Chrome with the camera: calibration, all 7 rounds, final screen
+- [x] Played in Chrome with the camera (Jason, 2026-10-28)
+- [x] Prepared repo for public sharing: README, .env.example
 - [ ] Tune thresholds and move angles with real bodies at 2 m
 
 ## Notes / decisions

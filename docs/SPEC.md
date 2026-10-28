@@ -1,12 +1,10 @@
 # Chuckle Vision: spec
 
-Plan page with architecture diagrams: https://claude.ai/artifact/DRmjtpjhQNPUv7nATB9y9B
-
 ## Brief
 
 A wordless icebreaker for two strangers, mostly university students from different backgrounds who may not share a first language. They stand side by side in front of the laptop webcam. A cartoon mascot (Bop) acts out a silly pose, they copy it, and the game scores them **as a team**. The goal is laughter. Demo: user testing on 2026-10-29.
 
-## Decisions (confirmed with Jason 2026-10-28)
+## Decisions (2026-10-28)
 
 - Team score, not head-to-head.
 - Hybrid judging: live scoring runs on the laptop. Claude vision sees one snapshot per round and returns only an emoji award, three judge cards and a smile count.
