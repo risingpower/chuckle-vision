@@ -3,7 +3,7 @@
 
 import Anthropic from '@anthropic-ai/sdk';
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { AWARDS } from '../src/core/judging';
+import { AWARDS } from '../src/core/judging.ts';
 
 const MODEL = 'claude-opus-5-5';
 const MAX_BODY = 4 * 1024 * 1024;
@@ -20,18 +20,20 @@ const MOVE_NAMES: Record<string, string> = {
 
 const SYSTEM = `You are a panel of three judges at a wordless icebreaker game. Two university students who have just met, often from different countries, stand side by side and copy a cartoon mascot's silly pose. You see the moment they held the pose.
 
-Judge commitment, energy and how well they matched the pose and each other. Be warm and generous: anyone visibly trying scores at least 5. Judges one and two are enthusiastic. Judge three is the famously hard-to-please one and usually scores one to three points lower, for comic effect.
+Judge commitment, energy and how well they matched the pose and each other. Be warm and generous: anyone visibly trying scores at least 5. Judges one and two are enthusiastic. Judge three (judge3) is the famously hard-to-please one and usually scores one to three points lower, for comic effect.
 
-Never judge or mention appearance, bodies, clothing, skin, ethnicity, gender or age. Your output is only numbers and one award symbol from the allowed list, chosen to fit the pose and the energy. Count how many people in the image are visibly smiling or laughing (0, 1 or 2).`;
+Never judge or mention appearance, bodies, clothing, skin, ethnicity, gender or age. Your output is only numbers and one award symbol from the allowed list, chosen to fit the pose and the energy. Count how many people in the image are visibly smiling or laughing (0, 1 or 2). If nobody is visible, still give low scores from 1 to 3.`;
 
 const SCHEMA = {
   type: 'object',
   properties: {
     award: { type: 'string', enum: [...AWARDS] },
-    judges: { type: 'array', items: { type: 'integer' } },
+    judge1: { type: 'integer' },
+    judge2: { type: 'integer' },
+    judge3: { type: 'integer' },
     smiles: { type: 'integer' },
   },
-  required: ['award', 'judges', 'smiles'],
+  required: ['award', 'judge1', 'judge2', 'judge3', 'smiles'],
   additionalProperties: false,
 };
 
@@ -89,8 +91,9 @@ export function createCriticHandler(apiKey: string | undefined) {
       if (response.stop_reason === 'refusal') return send(res, 422, { error: 'Declined' });
       const text = response.content.find((b) => b.type === 'text');
       if (!text || text.type !== 'text') return send(res, 502, { error: 'No verdict' });
+      const v = JSON.parse(text.text) as { award: string; judge1: number; judge2: number; judge3: number; smiles: number };
       console.log(`[critic] ${move} verdict in ${Date.now() - started} ms`);
-      return send(res, 200, JSON.parse(text.text));
+      return send(res, 200, { award: v.award, judges: [v.judge1, v.judge2, v.judge3], smiles: v.smiles });
     } catch (err) {
       if (err instanceof Anthropic.AuthenticationError) console.error('[critic] API key rejected');
       else if (err instanceof Anthropic.RateLimitError) console.error('[critic] Rate limited');

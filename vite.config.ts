@@ -1,5 +1,5 @@
 import { defineConfig, loadEnv, type Plugin } from 'vite';
-import { createCriticHandler } from './server/critic';
+import { createCriticHandler } from './server/critic.ts';
 
 function critic(apiKey: string | undefined): Plugin {
   const handler = createCriticHandler(apiKey);
@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
     plugins: [critic(env.ANTHROPIC_API_KEY)],
-    server: { port: 5173, open: false },
+    server: { port: 5188, strictPort: true },
+    preview: { port: 5188, strictPort: true },
   };
 });

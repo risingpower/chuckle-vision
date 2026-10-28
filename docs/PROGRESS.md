@@ -2,16 +2,19 @@
 
 ## Status
 
-Workspace set up, no toolchain. Waiting on the game brief.
+MVP built for the 2026-10-29 user-testing demo. Spec and architecture: `docs/SPEC.md`.
 
 ## Checklist
 
-- [x] Repo setup: CLAUDE.md, progress log
-- [ ] Write `docs/SPEC.md` from the brief, including the stack choice
-- [ ] Set up the toolchain and add its commands to CLAUDE.md
-- [ ] Break the spec into milestones here
+- [x] Spec, stack choice, toolchain
+- [x] Pose matching, round state machine, scoring (unit tested)
+- [x] Claude Silent Critic endpoint (verified live against the API)
+- [x] Mascot, scene, confetti, synthesised sound, replay recorder
+- [ ] Play through in Chrome with the camera: calibration, all 7 rounds, final screen
+- [ ] Tune thresholds and move angles with real bodies at 2 m
 
 ## Notes / decisions
 
-- 2026-10-28: Toolchain deliberately left out until the brief lands.
-- Machine note: shell default Node is v21 (EOL); nvm has v20, v22 and v24 installed if the stack is JS-based.
+- 2026-10-28: Team score, hybrid judging, adults (API OK), laptop screen only. Confirmed by Jason.
+- Port 5188 with strictPort, because 5173 was already in use on this machine.
+- Machine note: shell default Node is v21 (EOL). nvm has v20, v22 and v24; the project uses 24.

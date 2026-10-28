@@ -1,10 +1,16 @@
 # chuckle-vision
 
-A fun, interactive game. Game spec: `docs/SPEC.md` (to be written from Jason's brief).
+A wordless two-player camera icebreaker game. Spec: `docs/SPEC.md`.
 
 ## Stack
 
-Not chosen yet. Pick it from the brief, record the choice and why in `docs/SPEC.md`, then add the commands (run, test, check) here.
+Vite + TypeScript + Canvas 2D, MediaPipe pose tracking, Claude vision through a dev-server middleware. Why: `docs/SPEC.md`.
+
+Node 24 via nvm (`nvm use`). The API key goes in `.env.local` as `ANTHROPIC_API_KEY` (gitignored).
+
+- Run: `npm run dev`, then open http://localhost:5188 in Chrome. This also fetches the pose model and wasm into `public/` on first run.
+- Test: `npm test`
+- Check (types + tests): `npm run check`
 
 ## Workflow
 

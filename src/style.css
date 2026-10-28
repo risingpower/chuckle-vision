@@ -2,7 +2,7 @@ html,
 body {
   margin: 0;
   height: 100%;
-  background: #111;
+  background: #12122a;
   overflow: hidden;
 }
 
@@ -10,5 +10,54 @@ body {
   display: block;
   width: 100vw;
   height: 100vh;
-  touch-action: none;
+}
+
+#camera {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#go {
+  position: absolute;
+  left: 68%;
+  top: 50%;
+  width: 22vmin;
+  height: 22vmin;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1.2vmin solid #12122a;
+  background: #ffc21a;
+  cursor: pointer;
+  box-shadow: 0 1.4vmin 0 #12122a;
+  animation: breathe 1.6s ease-in-out infinite;
+}
+
+#go:focus-visible {
+  outline: 6px solid #22c7ee;
+  outline-offset: 6px;
+}
+
+#go svg {
+  width: 70%;
+  height: 70%;
+  fill: #12122a;
+}
+
+#go[hidden] {
+  display: none;
+}
+
+@keyframes breathe {
+  50% {
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #go {
+    animation: none;
+  }
 }
