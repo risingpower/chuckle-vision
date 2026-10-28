@@ -48,6 +48,24 @@ let tracked: Tracked = { players: [null, null], landmarks: [null, null] };
 let lastVideoTime = -1;
 let startPressed = false;
 
+// Dev-only: simulated players, so every screen can be checked without a camera.
+let simulate: ((g: typeof game) => Tracked['players']) | null = null;
+if (import.meta.env.DEV) {
+  Object.assign(window, {
+    __cv: {
+      game,
+      view,
+      currentMove,
+      simulate(fn: typeof simulate) {
+        simulate = fn;
+        view.loading = false;
+        view.error = null;
+        goButton.hidden = true;
+      },
+    },
+  });
+}
+
 // ---------------------------------------------------------------- start-up
 
 goButton.addEventListener('click', () => void boot());
@@ -234,10 +252,11 @@ startLoop({
   update(dt) {
     view.time += dt;
     view.confetti.update(dt);
-    if (!landmarker) return;
+    if (!landmarker && !simulate) return;
+    const players = simulate ? simulate(game) : tracked.players;
     const prev = game.t;
     const phase = game.phase;
-    const events = step(game, { dt, players: tracked.players, start: startPressed });
+    const events = step(game, { dt, players, start: startPressed });
     startPressed = false;
     if (game.phase === phase) timedCues(prev, game.t);
     for (const e of events) handle(e);

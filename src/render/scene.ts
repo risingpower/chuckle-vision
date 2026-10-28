@@ -733,11 +733,11 @@ export const CARD_TIMES = [1.0, 1.5, 2.3] as const;
 
 function drawJudges(ctx: CanvasRenderingContext2D, L: Layout, t: number, ex: RoundExtras) {
   const { feed } = L;
-  const h = feed.h * 0.13;
+  const h = feed.h * 0.19;
   const colors = [C.mint, C.cyan, C.tomato];
   for (let i = 0; i < 3; i++) {
-    const x = feed.x + feed.w * (0.3 + i * 0.2);
-    const y = feed.y + feed.h - h * 0.15;
+    const x = feed.x + feed.w * (0.25 + i * 0.25);
+    const y = feed.y + feed.h - h * 0.3;
     const up = ease((t - CARD_TIMES[i]!) / 0.3);
     const stingy = i === 2;
     const shape: Shape = up > 0
