@@ -4,7 +4,7 @@ A fun, interactive browser game. Game spec: `docs/SPEC.md` (to be written from J
 
 ## Stack
 
-- Vite + TypeScript (strict), no framework. Rendering via `<canvas>` unless the spec says otherwise.
+- Node 24 (`.nvmrc`; run `nvm use` — the shell default v21 is too old for Vite 8). Vite + TypeScript (strict), no framework. Rendering via `<canvas>` unless the spec says otherwise.
 - Vitest for unit tests (pure game logic). Playwright may be added for in-browser checks.
 
 ## Commands
