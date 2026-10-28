@@ -1,5 +1,7 @@
 # Chuckle Vision
 
+> Built as a 15-minute speed build, as an MVP for user testing.
+
 A wordless icebreaker game for two people who have just met. They stand side by side in front of a laptop webcam. A cartoon mascot acts out a silly pose, they copy it, and the game scores them as a team. There's no text to read during play, so it works across languages.
 
 - **Pose tracking runs on the laptop** (MediaPipe) and scores every frame live.
